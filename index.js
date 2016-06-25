@@ -76,6 +76,10 @@ exports = module.exports = (config = {}) => {
             ctx.type = 'html';
             ctx.body = html;
           }
+        })
+        .catch({ name: 'Template render error' }, err => {
+          ctx.status = 500;
+          throw err;
         });
     };
 

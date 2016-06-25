@@ -40,7 +40,6 @@ var defaultSettings = {
 /**
  * @param {Object=} config
  */
-// Function to further modify the Nunjucks environment
 exports = module.exports = function () {
   var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -112,6 +111,9 @@ exports = module.exports = function () {
                               ctx.type = 'html';
                               ctx.body = html;
                             }
+                          }).catch({ name: 'Template render error' }, function (err) {
+                            ctx.status = 500;
+                            throw err;
                           }));
 
                         case 3:
